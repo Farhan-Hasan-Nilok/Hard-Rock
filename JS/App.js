@@ -9,7 +9,7 @@ document.getElementById("searchBtn").addEventListener("click", function () {
             //    const album = data.data[0].artist.name;
             //    const artist = data.data[0].album.id;
             //    const title = data;
-                console.log(data.data);
+          //  console.log(data.data);
             const allInfo = data.data;
             showSongs(allInfo);
         })
@@ -35,14 +35,26 @@ function showSongs(allInfo) {
                 </div>
             </div>
             <div class="col-md-3 text-md-right text-center">
-                <button class="btn btn-success">Get Lyrics</button>
+                <button class="btn btn-success" onclick = "getLyrics('${artist.name}', '${title}')">Get Lyrics</button>
             </div>
             <hr class ="mt-2">
-            <div class = "col-md-12 text-center">
-            
+            <div class = "col-md-12 text-center" id = "song-lyric">
+              
             </div>
         </div>`
 
     }
 
+}
+//  const lyrics = document.querySelector(".song-lyric").addEventListener("click", function(){
+//     console.log("ehll");
+//  })
+function getLyrics(artist, title){
+
+    fetch(`https://api.lyrics.ovh/v1/${artist}/${title}`)
+    .then(res => res.json())
+    .then(data => {
+     console.log(data.lyrics);
+    })
+   
 }
